@@ -40,7 +40,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,14 +52,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base64.cs" />
-    <Compile Include="Models\AccessToken.cs" />
+    <Compile Include="Models\Auth\AccessAndRefreshToken.cs" />
+    <Compile Include="Models\Playback\Device.cs" />
+    <Compile Include="Models\Playback\Playback.cs" />
+    <Compile Include="Models\Playback\PlaybackContext.cs" />
+    <Compile Include="Models\Playback\User.cs" />
+    <Compile Include="Models\Track\Album.cs" />
+    <Compile Include="Models\Track\Artist.cs" />
+    <Compile Include="SpotifyLoginPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SpotifyLoginPopup.Designer.cs">
+      <DependentUpon>SpotifyLoginPopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Auth\AccessToken.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpotifyApi.cs" />
+    <Compile Include="Models\Track\Track.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SpotifyLoginPopup.resx">
+      <DependentUpon>SpotifyLoginPopup.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,14 +8,23 @@ namespace spotify2gether
 {
     class Program
     {
+        static SpotifyApi spotifyApi;
+
         static void Main(string[] args)
         {
-            SpotifyApi spotifyApi = new SpotifyApi();
+            spotifyApi = new SpotifyApi();
 
-            spotifyApi.RequestAccessToken();
-            Console.WriteLine(spotifyApi.AccessToken);
-            
+            spotifyApi.UserTokenReceivedEventHandler += TokenReceived;
+            spotifyApi.RequestUserToken();
+
             Console.ReadLine();
+        }
+
+        static void TokenReceived()
+        {
+            // Testing Endpoints
+            var playback = spotifyApi.CurrentPlayback();
+            Console.WriteLine();
         }
     }
 }
