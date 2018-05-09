@@ -53,12 +53,15 @@
   <ItemGroup>
     <Compile Include="Base64.cs" />
     <Compile Include="Models\Auth\AccessAndRefreshToken.cs" />
+    <Compile Include="Models\Collections\Devices.cs" />
+    <Compile Include="Models\Collections\Playlists.cs" />
     <Compile Include="Models\Playback\Device.cs" />
     <Compile Include="Models\Playback\Playback.cs" />
     <Compile Include="Models\Playback\PlaybackContext.cs" />
     <Compile Include="Models\Playback\User.cs" />
     <Compile Include="Models\Track\Album.cs" />
     <Compile Include="Models\Track\Artist.cs" />
+    <Compile Include="Models\Track\Playlist.cs" />
     <Compile Include="SpotifyLoginPopup.cs">
       <SubType>Form</SubType>
     </Compile>

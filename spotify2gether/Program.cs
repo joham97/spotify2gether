@@ -23,7 +23,6 @@ namespace spotify2gether
         static void TokenReceived()
         {
             // Testing Endpoints
-            var playback = spotifyApi.CurrentPlayback();
             Console.WriteLine();
         }
     }

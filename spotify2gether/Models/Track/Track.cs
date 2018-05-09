@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace spotify2gether
     {
         public int disc_number { get; set; }
         public int duration_ms { get; set; }
+        [JsonProperty("explicit")]
         public bool _explicit { get; set; }
         public string href { get; set; }
         public string id { get; set; }
@@ -22,6 +24,5 @@ namespace spotify2gether
         public IList<string> available_markets { get; set; }
         public IList<Artist> artists { get; set; }
         public Album album { get; set; }
-
     }
 }

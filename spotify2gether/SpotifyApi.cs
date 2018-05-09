@@ -151,7 +151,35 @@ namespace spotify2gether
             request.AddHeader("Authorization", $"Bearer {AccessAndRefreshToken.access_token}");
 
             // execute the request
+            apiClient.Execute(request);
+        }
+        public void SeekToPosition(string position_ms)
+        {
+            var request = new RestRequest($"/me/player/seek?position_ms={position_ms}", Method.PUT);
+            request.AddHeader("Authorization", $"Bearer {AccessAndRefreshToken.access_token}");
+
+            // execute the request
+            apiClient.Execute(request);
+        }
+        public IList<Device> GetDevices()
+        {
+            var request = new RestRequest($"/me/player/devices", Method.GET);
+            request.AddHeader("Authorization", $"Bearer {AccessAndRefreshToken.access_token}");
+
+            // execute the request
             IRestResponse response = apiClient.Execute(request);
+            return JsonConvert.DeserializeObject<Devices>(response.Content).devices;
+        }
+        #endregion
+        #region Playlists
+        public IList<Playlist> GetPlaylists(string id)
+        {
+            var request = new RestRequest($"/users/{id}/playlists", Method.GET);
+            request.AddHeader("Authorization", $"Bearer {AccessAndRefreshToken.access_token}");
+
+            // execute the request
+            IRestResponse response = apiClient.Execute(request);
+            return JsonConvert.DeserializeObject<Playlists>(response.Content).items;
         }
         #endregion
     }
