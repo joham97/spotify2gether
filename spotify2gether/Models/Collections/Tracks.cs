@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SpotifyApi.Models
 {
-    class Playlists
+    class Tracks
     {
-        public IList<Playlist> items { get; set; }        
+        public IList<Track> items { get; set; }        
     }
 }

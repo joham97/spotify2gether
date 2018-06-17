@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Authenticators;
+using SpotifyApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +10,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace spotify2gether
+namespace SpotifyApi
 {
     class SpotifyApi
     {
 
-        private const string CLIENT_ID = "***";
-        private const string CLIENT_SECRET = "***";
+        private const string CLIENT_ID = "80e24d7d78304b8ebba8daab8296ec05";
+        private const string CLIENT_SECRET = "bcb50ada7e6d48cda3f0131354fdfd37";
 
-        private const string REDIRECT = "https%3A%2F%2Fexample.com%2Fcallback";
+        private const string REDIRECT = "http%3A%2F%2Fexample.com";
 
-        private const string SCOPES = "user-read-private user-read-email user-modify-playback-state user-read-playback-state user-read-currently-playing";
+        private const string SCOPES = "user-read-private user-read-email user-modify-playback-state user-read-playback-state user-read-currently-playing playlist-modify-public playlist-modify-private";
         
         private RestClient apiClient, accountsClient;
 
@@ -123,7 +124,7 @@ namespace spotify2gether
         }
         #endregion
 
-        #region user
+        #region User
         public User GetMe()
         {
             var request = new RestRequest("/me", Method.GET);
@@ -171,6 +172,7 @@ namespace spotify2gether
             return JsonConvert.DeserializeObject<Devices>(response.Content).devices;
         }
         #endregion
+        
         #region Playlists
         public IList<Playlist> GetPlaylists(string id)
         {
@@ -181,6 +183,52 @@ namespace spotify2gether
             IRestResponse response = apiClient.Execute(request);
             return JsonConvert.DeserializeObject<Playlists>(response.Content).items;
         }
+        public List<Track> GetTracksOfPlaylist(string user_id, string playlist_id)
+        {
+            var request = new RestRequest($"/users/{user_id}/playlists/{playlist_id}/tracks", Method.GET);
+            request.AddHeader("Authorization", $"Bearer {AccessAndRefreshToken.access_token}");
+
+            // execute the request
+            IRestResponse response = apiClient.Execute(request);
+
+            var obj = new { items = new List<TrackWrapper>() };
+
+            var items = JsonConvert.DeserializeAnonymousType(response.Content, obj).items;
+
+            var tracks = new List<Track>();
+            items.ForEach(tw => tracks.Add(tw.track));
+
+            return tracks;
+        }
+
+        public void AddTrackToPlaylist(string user_id, string playlist_id, string track_id)
+        {
+            var request = new RestRequest($"/users/{user_id}/playlists/{playlist_id}/tracks?uris=spotify%3Atrack%3A{track_id}", Method.POST);
+            request.AddHeader("Authorization", $"Bearer {AccessAndRefreshToken.access_token}");
+
+            // execute the request
+            IRestResponse response = apiClient.Execute(request);
+            Console.WriteLine(response.IsSuccessful);
+        }
         #endregion
+
+        #region Search
+        public IList<Track> SearchTrack(string track)
+        {
+            var request = new RestRequest($"/search", Method.GET);
+            request.AddParameter("q", track);
+            request.AddParameter("type", "track");
+            request.AddParameter("market", "DE");
+            request.AddHeader("Authorization", $"Bearer {AccessAndRefreshToken.access_token}");
+
+            // execute the request
+            IRestResponse response = apiClient.Execute(request);
+
+            var obj = new { tracks = new { items = new List<Track>() } };
+
+            return JsonConvert.DeserializeAnonymousType(response.Content, obj).tracks.items;
+        }
+        #endregion
+
     }
 }

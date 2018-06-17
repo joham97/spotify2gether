@@ -1,6 +1,6 @@
 ﻿namespace SpotifyApi
 {
-    partial class SpotifyLoginPopup
+    partial class SpotifyLogout
     {
         /// <summary>
         /// Required designer variable.

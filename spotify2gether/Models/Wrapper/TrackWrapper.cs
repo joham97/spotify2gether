@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpotifyApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SpotifyApi.Models
 {
-    class Playlists
+    class TrackWrapper
     {
-        public IList<Playlist> items { get; set; }        
+        public Track track { get; set; }
     }
 }
