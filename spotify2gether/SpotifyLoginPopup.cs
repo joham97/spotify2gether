@@ -4,11 +4,12 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace spotify2gether
+namespace SpotifyApi
 {
     public partial class SpotifyLoginPopup : Form
     {
@@ -26,7 +27,7 @@ namespace spotify2gether
 
         private void Browser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
-            if(e.Url.AbsoluteUri.StartsWith("https://example.com/callback"))
+            if(e.Url.AbsoluteUri.StartsWith("http://example.com"))
             {
                 // Read Arguments
                 var code = string.Empty;
@@ -51,5 +52,6 @@ namespace spotify2gether
                 this.Close();
             }
         }
+        
     }
 }

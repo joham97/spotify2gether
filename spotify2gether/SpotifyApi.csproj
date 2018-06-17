@@ -54,6 +54,7 @@
     <Compile Include="Base64.cs" />
     <Compile Include="Models\Auth\AccessAndRefreshToken.cs" />
     <Compile Include="Models\Collections\Devices.cs" />
+    <Compile Include="Models\Collections\Tracks.cs" />
     <Compile Include="Models\Collections\Playlists.cs" />
     <Compile Include="Models\Playback\Device.cs" />
     <Compile Include="Models\Playback\Playback.cs" />
@@ -62,6 +63,13 @@
     <Compile Include="Models\Track\Album.cs" />
     <Compile Include="Models\Track\Artist.cs" />
     <Compile Include="Models\Track\Playlist.cs" />
+    <Compile Include="Models\Wrapper\TrackWrapper.cs" />
+    <Compile Include="SpotifyLogout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SpotifyLogout.Designer.cs">
+      <DependentUpon>SpotifyLogout.cs</DependentUpon>
+    </Compile>
     <Compile Include="SpotifyLoginPopup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +87,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="SpotifyLogout.resx">
+      <DependentUpon>SpotifyLogout.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SpotifyLoginPopup.resx">
       <DependentUpon>SpotifyLoginPopup.cs</DependentUpon>
     </EmbeddedResource>
